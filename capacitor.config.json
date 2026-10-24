@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.spendwise",
+  "appName": "SpendWise",
+  "webDir": ".",
+  "bundledWebRuntime": false
+}

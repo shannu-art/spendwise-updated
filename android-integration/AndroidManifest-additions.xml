@@ -1,0 +1,10 @@
+<!-- Merge these entries into android/app/src/main/AndroidManifest.xml inside <application>. -->
+<service
+    android:name="com.example.spendwise.UpiNotificationListenerService"
+    android:label="SpendWise transaction notification access"
+    android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+    android:exported="true">
+    <intent-filter>
+        <action android:name="android.service.notification.NotificationListenerService" />
+    </intent-filter>
+</service>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101426"><meta name="description" content="SpendWise personal expense tracker">
+<link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css">
+<title>SpendWise — Expense Tracker</title>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    
+    <nav aria-label="Main navigation">
+      <button class="nav active" data-view="dashboard"><span class="nav-icon">⌂</span><span>Home</span></button>
+      <button class="nav" data-view="payments"><span class="nav-icon">₹</span><span>Pay</span></button>
+      <button class="nav" data-view="transactions"><span class="nav-icon">◷</span><span>History</span></button>
+      <button class="nav" data-view="budget"><span class="nav-icon">▥</span><span>Budget</span></button>
+      <button class="nav" data-view="profile"><span class="nav-icon">♙</span><span>Profile</span></button>
+    </nav>
+    <div class="sidebar-note"><span class="dot"></span> Demo mode <small>No bank account connected</small></div>
+  </aside>
+  <main>
+    <header class="app-header">
+      <button class="app-brand" type="button" data-go="dashboard" aria-label="SpendWise home"><span class="brand-icon">◈</span><span><b>SpendWise</b><small>PERSONAL FINANCE</small></span></button>
+      <button class="header-profile" type="button" data-go="profile" aria-label="Open profile"><span class="header-avatar">S</span><span class="header-profile-label">Profile</span></button>
+    </header>
+    <section id="view-dashboard" class="view">
+      <div class="view-heading"><p class="eyebrow">YOUR MONEY, MADE CLEAR</p><h1>Home</h1></div>
+      <article class="balance-hero">
+        <div class="balance-copy"><span>Total spending this month</span><div id="home-balance" class="balance-number">₹0</div><small><span class="trend-arrow">↗</span> Stay aware. Spend wisely.</small></div>
+        <div class="balance-wave" aria-hidden="true"></div>
+      </article>
+      <div class="quick-actions" aria-label="Quick actions">
+        <button class="quick-action" data-go="scan"><span class="quick-icon qr">▦</span><b>Scan &amp; Pay</b></button>
+        <button class="quick-action" data-go="payments" data-focus-pay="true"><span class="quick-icon upi">↗</span><b>Pay UPI ID</b></button>
+        <button class="quick-action" data-go="transactions"><span class="quick-icon bank">▤</span><b>History</b></button>
+        <button class="quick-action" data-go="import"><span class="quick-icon transfer">⇄</span><b>Import data</b></button>
+      </div>
+      <article class="home-section transfer-section">
+        <div class="home-section-head"><div><h2>Money tools</h2><p>Move through your money with clarity</p></div><button class="text-btn" data-go="payments">View all →</button></div>
+        <div class="home-tool-grid">
+          <button class="home-tool" data-go="payments"><span class="tool-icon green-tool">↗</span><b>UPI preview</b><small>Demo only</small></button>
+          <button class="home-tool" data-go="payments"><span class="tool-icon violet-tool">▤</span><b>Bank transfer</b><small>Partner required</small></button>
+          <button class="home-tool" data-go="transactions"><span class="tool-icon coral-tool">▱</span><b>Transactions</b><small>View records</small></button>
+          <button class="home-tool" data-go="connections"><span class="tool-icon cyan-tool">⌁</span><b>Connections</b><small>Setup options</small></button>
+        </div>
+      </article>
+      <article class="home-section bills-preview">
+        <div class="home-section-head"><div><h2>Recharge &amp; Bills</h2><p>Everyday services in one place</p></div><button class="text-btn" data-go="bills">View all →</button></div>
+        <div class="bill-shortcuts">
+          <button class="bill-shortcut" data-bill="Mobile Recharge"><span class="bill-icon blue">▣</span><b>Mobile</b><small>Recharge</small></button>
+          <button class="bill-shortcut" data-bill="DTH"><span class="bill-icon violet">◉</span><b>DTH</b></button>
+          <button class="bill-shortcut" data-bill="Electricity"><span class="bill-icon yellow">ϟ</span><b>Electricity</b></button>
+          <button class="bill-shortcut" data-bill="Broadband"><span class="bill-icon cyan">⌁</span><b>Broadband</b></button>
+          <button class="bill-shortcut" data-bill="Gas"><span class="bill-icon coral">♨</span><b>Gas</b></button>
+          <button class="bill-shortcut" data-go="bills"><span class="bill-icon muted-icon">•••</span><b>More</b></button>
+        </div>
+      </article>
+      <article class="insights-banner"><div><span class="insights-kicker">YOUR MONEY, IN FOCUS</span><h2>Track your spending</h2><p>See where your money goes and stay in control.</p><button class="insights-button" data-go="budget">View budget <span>→</span></button></div><div class="insights-art" aria-hidden="true"><span></span><span></span><span></span><i>↗</i></div></article>
+      <div class="cards">
+        <article class="metric"><span>Monthly spending</span><div id="spent" class="metric-value">₹0</div><small id="transaction-count">0 transactions</small></article>
+        <article class="metric"><span>Budget remaining</span><div id="remaining" class="metric-value green">₹0</div><small id="budget-caption">Monthly budget</small></article>
+        <article class="metric"><span>Average per day</span><div id="average" class="metric-value">₹0</div><small>This month so far</small></article>
+      </div>
+      <article class="panel"><div class="panel-head"><div><h2>Recent transactions</h2><p>Your latest imported and manual expenses</p></div><button class="text-btn" data-go="transactions">View all →</button></div><div id="recent-list"></div></article>
+      <div class="notice"><b>Demo data</b><span>Transactions shown until you import a statement are sample records stored in this browser only.</span></div>
+    </section>
+    <section id="view-payments" class="view hidden">
+      <article class="payment-hero payment-hero-phonepe"><div><p class="eyebrow">SPENDWISE PAY</p><h2>Money transfers</h2><p>Choose how you want to pay. Real UPI transfers are not enabled in this build.</p><span class="pill warning">Demo mode · No money moves</span></div><div class="pay-symbol">₹</div></article>
+      <section class="money-transfers" aria-labelledby="money-transfers-title">
+        <div class="money-transfers-heading"><h2 id="money-transfers-title">Money Transfers</h2><button class="invite-demo" id="demo-invite" type="button">✦ Invite Now</button></div>
+        <div class="payment-actions payment-actions-phonepe">
+          <button class="payment-action" id="demo-upi"><span class="payment-round-icon">▣</span><b>To Mobile<br>Number / UPI ID</b><small>Demo only</small></button>
+          <button class="payment-action" id="demo-bank"><span class="payment-round-icon">▤</span><b>To Bank &<br>Self A/c</b><small>Requires partner</small></button>
+          <button class="payment-action" id="demo-wallet"><span class="payment-round-icon">▱</span><b>SpendWise<br>Wallet</b><small>Not available</small></button>
+          <button class="payment-action" id="demo-balance"><span class="payment-round-icon">₹</span><b>Check<br>Balance</b><small>Bank linking required</small></button>
+        </div>
+      </section>
+      <div class="payment-secondary-actions">
+        <button class="secondary" id="demo-scan" type="button">▦ &nbsp; Scan any QR</button>
+        <button class="secondary" id="demo-history">↔ &nbsp; Payment history</button>
+      </div>
+      <article class="panel"><div class="panel-head"><div><h2>Pay a UPI ID</h2><p>Preview the form. This does not initiate a real payment.</p></div><span class="pill warning">Demo</span></div><form id="demo-pay-form" class="demo-pay-form"><label>Recipient UPI ID<input id="demo-payee" placeholder="name@bank" autocomplete="off" required></label><label>Amount (₹)<input id="demo-pay-amount" type="number" min="1" max="100000" step="1" placeholder="500" required></label><label>Note (optional)<input id="demo-pay-note" maxlength="80" placeholder="e.g. Lunch"></label><button class="primary" type="submit">Preview payment</button></form><p class="muted">No bank account is linked. Do not enter your UPI PIN here. SpendWise will never ask for your UPI PIN or OTP.</p></article>
+      <article class="panel"><h2>What is live vs. planned?</h2><div class="feature-status"><p><span class="status-dot done"></span><b>Working now:</b> expense dashboard, local transaction history, CSV import and manual expense entry.</p><p><span class="status-dot demo"></span><b>Demo only:</b> payment action buttons, QR scanner screen and UPI payment preview.</p><p><span class="status-dot pending"></span><b>Needs external approval:</b> actual UPI transfers, merchant QR acceptance, bank account linking and biller payments.</p></div></article>
+    </section>
+    <section id="view-budget" class="view hidden">
+      <div class="view-heading"><p class="eyebrow">PLAN WITH CONFIDENCE</p><h1>Budget & insights</h1></div>
+      <div class="cards">
+        <article class="metric"><span>Monthly spending</span><div id="budget-view-spent" class="metric-value">₹0</div><small>This month</small></article>
+        <article class="metric"><span>Budget remaining</span><div id="budget-view-remaining" class="metric-value green">₹0</div><small>Against your limit</small></article>
+      </div>
+      <div class="grid-two">
+        <article class="panel" id="budget-panel"><div class="panel-head"><div><h2>Monthly budget</h2><p>Track spending against your limit</p></div><label class="inline-label">₹ <input id="budget" type="number" min="0" value="10000" aria-label="Monthly budget"></label></div><div class="progress"><div id="progress-bar"></div></div><div class="progress-labels"><span id="budget-used">₹0 spent</span><span id="budget-percent">0%</span></div></article>
+        <article class="panel"><h2>Spending by category</h2><p>Where your money goes</p><div id="category-chart" class="category-list"></div></article>
+      </div>
+      <article class="panel"><h2>Spending tips</h2><p id="budget-tip">Add or import transactions to see your spending insights.</p><button class="secondary" type="button" data-go="transactions">Review transactions</button></article>
+    </section>
+    <section id="view-bills" class="view hidden">
+      <div class="subpage-heading"><button class="back-btn" data-go="dashboard" aria-label="Back to Home">←</button><div><h2>Recharge &amp; Bills</h2><p>Choose a service to continue</p></div><span class="help-mark">?</span></div>
+      <article class="bill-group">
+        <h3>Suggested for you</h3>
+        <div class="bill-grid four">
+          <button class="bill-category" data-bill="FASTag Recharge"><span class="bill-icon violet">▣</span><b>FASTag</b><small>Recharge</small></button>
+          <button class="bill-category" data-bill="Insurance"><span class="bill-icon blue">✚</span><b>LIC / Insurance</b></button>
+          <button class="bill-category" data-bill="Credit Card Bill"><span class="bill-icon coral">▤</span><b>Credit Card</b><small>Bill</small></button>
+          <button class="bill-category" data-bill="Loan Repayment"><span class="bill-icon yellow">₹</span><b>Loan</b><small>Repayment</small></button>
+        </div>
+      </article>
+      <article class="bill-group"><h3>Telecom &amp; Recharges</h3>
+        <div class="bill-grid four">
+          <button class="bill-category" data-bill="Mobile Recharge"><span class="bill-icon blue">▣</span><b>Mobile</b><small>Recharge</small></button>
+          <button class="bill-category" data-bill="DTH"><span class="bill-icon violet">◉</span><b>DTH</b></button>
+          <button class="bill-category" data-bill="Mobile Postpaid"><span class="bill-icon cyan">▤</span><b>Mobile</b><small>Postpaid</small></button>
+          <button class="bill-category" data-bill="Google Play"><span class="bill-icon green">▶</span><b>Google Play</b></button>
+          <button class="bill-category" data-bill="Cable TV"><span class="bill-icon muted-icon">▣</span><b>Cable TV</b></button>
+          <button class="bill-category" data-bill="International Roaming"><span class="bill-icon blue">✈</span><b>International</b><small>Roaming</small></button>
+          <button class="bill-category" data-bill="SIM Services"><span class="bill-icon coral">▣</span><b>Get SIM</b></button>
+          <button class="bill-category" data-bill="App Store"><span class="bill-icon cyan">●</span><b>App Store</b></button>
+        </div>
+      </article>
+      <article class="bill-promo"><span class="bill-promo-icon">◉</span><div><b>Small savings, made simple!</b><p>Explore savings and money tools in SpendWise.</p></div><span>›</span></article>
+      <article class="bill-group"><h3>Utilities</h3>
+        <div class="bill-grid four">
+          <button class="bill-category" data-bill="Electricity"><span class="bill-icon yellow">ϟ</span><b>Electricity</b></button>
+          <button class="bill-category" data-bill="Credit Card Bill"><span class="bill-icon blue">▤</span><b>Credit Card</b><small>Bill</small></button>
+          <button class="bill-category" data-bill="Loan Repayment"><span class="bill-icon violet">₹</span><b>Loan</b><small>Repayment</small></button>
+          <button class="bill-category" data-bill="Cylinder Booking"><span class="bill-icon coral">♨</span><b>Book Cylinder</b></button>
+          <button class="bill-category" data-bill="Broadband"><span class="bill-icon cyan">⌁</span><b>Broadband</b></button>
+          <button class="bill-category" data-bill="Piped Gas"><span class="bill-icon coral">♨</span><b>Piped Gas</b></button>
+          <button class="bill-category" data-bill="Water"><span class="bill-icon blue">◌</span><b>Water</b></button>
+          <button class="bill-category" data-bill="Prepaid Meter"><span class="bill-icon yellow">▤</span><b>Prepaid Meter</b></button>
+          <button class="bill-category" data-bill="File ITR"><span class="bill-icon violet">▧</span><b>File ITR</b></button>
+        </div>
+      </article>
+      <article class="bill-group"><h3>Vehicle Payments</h3>
+        <div class="bill-grid four">
+          <button class="bill-category" data-bill="FASTag Recharge"><span class="bill-icon green">▣</span><b>FASTag</b><small>Recharge</small></button>
+          <button class="bill-category" data-bill="Car Insurance"><span class="bill-icon blue">▱</span><b>Buy Car</b><small>Insurance</small></button>
+          <button class="bill-category" data-bill="Bike Insurance"><span class="bill-icon violet">⌁</span><b>Buy Bike</b><small>Insurance</small></button>
+          <button class="bill-category" data-bill="eChallan"><span class="bill-icon coral">▤</span><b>eChallan</b></button>
+          <button class="bill-category" data-bill="Fleet Card"><span class="bill-icon cyan">▣</span><b>Fleet Card</b></button>
+          <button class="bill-category" data-bill="EV Recharge"><span class="bill-icon green">ϟ</span><b>EV Recharge</b></button>
+          <button class="bill-category" data-bill="Motor Policy"><span class="bill-icon blue">✓</span><b>Motor Policy</b></button>
+        </div>
+      </article>
+      <article class="bill-group"><h3>Housing &amp; Society</h3>
+        <div class="bill-grid four">
+          <button class="bill-category" data-bill="Municipal Tax"><span class="bill-icon blue">⌂</span><b>Municipal Tax</b></button>
+          <button class="bill-category" data-bill="Rentals"><span class="bill-icon violet">⌂</span><b>Rentals</b></button>
+          <button class="bill-category" data-bill="Clubs & Associations"><span class="bill-icon cyan">♧</span><b>Clubs &amp;</b><small>Associations</small></button>
+          <button class="bill-category" data-bill="Apartment Maintenance"><span class="bill-icon yellow">▥</span><b>Apartment</b></button>
+        </div>
+      </article>
+      <article class="bill-group"><h3>Others</h3>
+        <div class="bill-grid four">
+          <button class="bill-category" data-bill="Donation"><span class="bill-icon coral">♡</span><b>Donation</b></button>
+          <button class="bill-category" data-bill="Education Fee"><span class="bill-icon blue">▱</span><b>Education Fee</b></button>
+          <button class="bill-category" data-bill="NPS Contribution"><span class="bill-icon violet">♙</span><b>NPS</b><small>Contribution</small></button>
+          <button class="bill-category" data-bill="Subscriptions"><span class="bill-icon green">▷</span><b>Subscription</b></button>
+        </div>
+      </article>
+      <article class="panel bill-demo-note"><b>Service directory preview</b><p>These categories are for browsing only. Bill payments and recharges are not connected to service providers in this build.</p></article>
+    </section>
+    <section id="view-scan" class="view hidden">
+      <div class="subpage-heading"><button class="back-btn" data-go="payments" aria-label="Back to Pay">←</button><div><h2>Scan &amp; Pay</h2><p>Scan a QR code to preview its contents</p></div></div>
+      <article class="panel scan-panel"><div class="scan-frame"><div class="scan-corners">▦</div><p id="scan-status">Camera scanning is available on supported browsers over HTTPS.</p></div><div class="button-row"><button class="primary" id="start-scan" type="button">Start camera</button><button class="secondary" id="stop-scan" type="button">Stop camera</button></div><video id="scan-video" playsinline muted class="scan-video hidden"></video><label class="file-label">Choose QR image<input id="qr-image" type="file" accept="image/*"></label><p id="scan-result" class="muted">QR contents will appear here. Scanning does not initiate a payment.</p></article>
+    </section>
+    <section id="view-transactions" class="view hidden">
+      <article class="panel"><div class="panel-head"><div><h2>All transactions</h2><p>Search, review and remove entries</p></div><input id="search" class="search" placeholder="Search merchant or category…"></div><div id="transaction-list"></div></article>
+    </section>
+    <section id="view-import" class="view hidden">
+      <article class="panel import-panel"><div class="upload-icon">⇧</div><h2>Import a bank statement</h2><p>Upload a CSV exported from your bank or payment provider. Files are processed locally in this browser; this demo does not upload them to a server.</p><label class="file-label">Choose CSV file<input type="file" id="csv-file" accept=".csv,text/csv"></label><div id="import-status" role="status"></div></article>
+      <article class="panel"><h2>Expected CSV columns</h2><p>Use a header row. Common column names are recognized automatically.</p><code>Date, Description, Amount, Type, Category, Reference</code><p class="muted">Amounts may be signed (negative = expense) or paired with a Type column containing debit/credit. Review your imported transactions for accuracy.</p></article>
+    </section>
+    <section id="view-connections" class="view hidden">
+      <article class="panel"><div class="status-row"><div class="connection-icon">🔔</div><div class="grow"><h2>UPI notification tracking</h2><p>Detect eligible payment notifications on this Android device.</p></div><span class="pill warning" id="upi-status">Not enabled</span></div><div class="notice"><b>Android permission required</b><span>SpendWise can process supported notifications only after you enable notification access in Android settings. Notifications may be incomplete and are not bank-confirmed records. Review every detected transaction before relying on it.</span></div><div class="button-row"><button class="primary" id="upi-enable">Enable notification access</button><button class="secondary" id="upi-refresh">Check status</button></div><p id="upi-help" class="muted" role="status">Android app required. This feature will not work on the GitHub Pages website.</p></article>
+      <article class="panel"><h2>Recent detected alerts</h2><p class="muted">Incoming alerts will be parsed locally. Confirm or correct the amount and category before considering them final.</p><div id="upi-alerts" class="checklist"><p>No notifications detected yet.</p></div></article>
+      <article class="panel"><h2>Limitations & privacy</h2><p>Only selected payment-app notifications are inspected. This does not read UPI apps directly, provide complete bank history, or guarantee that every payment appears. Notification text is sensitive; keep device access protected and disable this permission whenever you want.</p></article>
+    </section>
+    <section id="view-privacy" class="view hidden">
+      <article class="panel"><h2>Privacy & security</h2><div class="security-list"><p>✓ CSV parsing happens locally in this browser demo.</p><p>✓ Transactions are stored in this browser's local storage.</p><p>✓ Duplicate detection uses a normalized transaction fingerprint.</p><p>! Browser storage is not encrypted vault storage. Avoid shared/public devices.</p><p>! Clearing site data removes locally saved transactions.</p><p>! No live bank connection is active in this prototype.</p></div><button class="danger" id="clear-data">Delete all local transaction data</button></article>
+    </section>
+    <section id="view-profile" class="view hidden">
+      <article class="panel profile-panel"><div class="profile-avatar">S</div><h2>SpendWise settings</h2><p>Manage imports, connections and your privacy preferences.</p>
+        <button class="profile-link" id="profile-add-expense" type="button"><span>＋</span><div><b>Add expense</b><small>Record a manual transaction</small></div><i>›</i></button>
+        <button class="profile-link" data-go="import"><span>⇧</span><div><b>Import statement</b><small>Bring in a bank CSV file</small></div><i>›</i></button>
+        <button class="profile-link" data-go="connections"><span>⌁</span><div><b>Connections</b><small>Integration setup and status</small></div><i>›</i></button>
+        <button class="profile-link" data-go="privacy"><span>♧</span><div><b>Privacy & security</b><small>Local data and privacy controls</small></div><i>›</i></button>
+      </article>
+    </section>
+  </main>
+</div>
+<dialog id="add-dialog"><form method="dialog" id="add-form"><div class="panel-head"><h2>Add expense</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div><label>Merchant or description<input id="merchant" required placeholder="e.g. Grocery store"></label><div class="form-row"><label>Amount (₹)<input id="amount" type="number" min="0.01" step="0.01" required></label><label>Date<input id="date" type="date" required></label></div><label>Category<select id="category"><option>Food & Drink</option><option>Groceries</option><option>Transport</option><option>Shopping</option><option>Bills</option><option>Health</option><option>Income</option><option>Transfer</option><option>Other</option></select></label><button class="primary full" type="submit">Save transaction</button></form></dialog>
+<dialog id="bill-dialog"><form method="dialog" id="bill-form"><div class="panel-head"><h2 id="bill-dialog-title">Service preview</h2><button class="icon-btn" value="cancel" aria-label="Close">×</button></div><p id="bill-dialog-copy">This is a demo only.</p><label id="bill-id-label">Customer / account number<input id="bill-customer" required placeholder="Enter customer number"></label><label>Amount (₹)<input id="bill-amount" type="number" min="1" step="1" required placeholder="Enter amount"></label><button class="primary full" type="submit">Preview bill payment</button><p class="muted">No bill will be paid. Live biller payments need an approved provider.</p></form></dialog>
+<div id="toast" role="status" class="toast"></div>
+<script src="app.js"></script>
+</body></html>
